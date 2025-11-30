@@ -1,0 +1,98 @@
+[31-Mar-2025 18:31:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::fetchAl() in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 6
+[31-Mar-2025 18:31:55 UTC] PHP Fatal error:  Uncaught Error: Class "FilePress" not found in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 12
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 24
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 24
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 24
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 24
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 24
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 24
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 23
+[31-Mar-2025 18:55:12 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 24
+[31-Mar-2025 19:03:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 35
+[31-Mar-2025 19:03:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 35
+[31-Mar-2025 19:03:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 35
+[31-Mar-2025 19:03:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 35
+[31-Mar-2025 19:03:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 35
+[31-Mar-2025 19:04:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 35
+[31-Mar-2025 19:05:10 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 35
+[31-Mar-2025 19:06:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method StreamHG::chechApi() in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 32
+[31-Mar-2025 19:10:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 40
+[31-Mar-2025 19:11:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 40
+[31-Mar-2025 19:14:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Hubcloud::checkApi() in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php:41
+Stack trace:
+#0 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 41
+[31-Mar-2025 19:21:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Hydrax::upload(), 1 passed in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 42 and exactly 2 expected in /home/deaddrive/public_html/sites/deaddrive.shop/lib/Hydrax.php:5
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php(42): Hydrax::upload('18cyUzD73CyZsyx...')
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/Hydrax.php on line 5
+[31-Mar-2025 19:21:32 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:32 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:33 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:33 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:34 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:34 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:34 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:34 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:35 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:35 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:36 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:36 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:36 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:36 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:36 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:36 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:37 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:37 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:37 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:37 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:37 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:37 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:38 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:38 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[31-Mar-2025 19:21:38 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 50
+[31-Mar-2025 19:21:38 UTC] PHP Warning:  Undefined variable $check in /home/deaddrive/public_html/sites/deaddrive.shop/crons/check-user-apis.php on line 52
+[03-Apr-2025 12:54:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/lib/Pack.php on line 34
+[18-Apr-2025 09:46:43 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away in /home/deaddrive/public_html/sites/deaddrive.shop/lib/Pack.php:17
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Pack.php(17): PDOStatement->execute(Array)
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/crons/hubcloud-in-packs.php(13): Pack->notHubcloud()
+#2 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/Pack.php on line 17
+[19-Apr-2025 14:37:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/deaddrive/public_html/sites/deaddrive.shop/lib/Pack.php on line 34

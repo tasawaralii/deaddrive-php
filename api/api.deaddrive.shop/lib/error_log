@@ -1,0 +1,170 @@
+[01-Apr-2025 19:19:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function str_pos() in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:77
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(50): User->setUserWebsite('ZikAnime', 'zikanime.xyz')
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 77
+[01-Apr-2025 19:22:03 UTC] PHP Warning:  Undefined variable $pdo in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 86
+[01-Apr-2025 19:22:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:86
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(50): User->setUserWebsite('ZikAnime', 'https://zikanim...')
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 86
+[02-Apr-2025 08:08:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 142
+[02-Apr-2025 08:08:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 144
+[02-Apr-2025 08:08:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 149
+[02-Apr-2025 08:08:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 150
+[02-Apr-2025 08:08:46 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:141
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(1)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 141
+[02-Apr-2025 08:11:09 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:141
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(1)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 141
+[02-Apr-2025 08:11:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:141
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(1)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 141
+[02-Apr-2025 08:13:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:141
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(1)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 141
+[02-Apr-2025 08:13:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:141
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(2)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 141
+[02-Apr-2025 08:16:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:142
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(2)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 142
+[02-Apr-2025 08:18:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:142
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(2)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 142
+[02-Apr-2025 08:18:41 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:143
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php(143): PDOStatement->execute(Array)
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(2)
+#2 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 143
+[02-Apr-2025 08:19:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:144
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(2)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 144
+[02-Apr-2025 08:20:11 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:144
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(2)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 144
+[02-Apr-2025 08:20:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:144
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(52): User->getUserServerDetails(2)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 144
+[02-Apr-2025 08:21:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:144
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(53): User->getUserServerDetails(2)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 144
+[02-Apr-2025 08:21:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:144
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(53): User->getUserServerDetails(2)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 144
+[02-Apr-2025 08:21:44 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on bool in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:144
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(53): User->getUserServerDetails(2)
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 144
+[02-Apr-2025 08:22:31 UTC] PHP Warning:  Undefined array key "api_parameters_number" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 152
+[02-Apr-2025 08:22:31 UTC] PHP Warning:  Undefined array key "Name" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 157
+[02-Apr-2025 14:26:25 UTC] PHP Warning:  Undefined property: User::$getUserId in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 242
+[02-Apr-2025 14:26:25 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND user_id = NULL AND server_id = '1' LIMIT 1' at line 1 in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:242
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php(242): PDOStatement->execute(Array)
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(54): User->moveServer(1, 'up')
+#2 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 242
+[02-Apr-2025 14:26:42 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND user_id = '4018' AND server_id = '1' LIMIT 1' at line 1 in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php:242
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php(242): PDOStatement->execute(Array)
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(54): User->moveServer(1, 'up')
+#2 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 242
+[02-Apr-2025 14:50:23 UTC] PHP Warning:  Undefined variable $server in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 252
+[03-Apr-2025 06:26:00 UTC] PHP Warning:  Undefined array key "embdInDwnld" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/User.php on line 46
+[03-Apr-2025 06:35:19 UTC] PHP Warning:  Undefined array key "down" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 89
+[03-Apr-2025 06:35:19 UTC] PHP Warning:  Undefined array key "down" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 89
+[03-Apr-2025 06:35:19 UTC] PHP Warning:  Undefined array key "down" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 89
+[03-Apr-2025 06:35:19 UTC] PHP Warning:  Undefined array key "down" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 89
+[03-Apr-2025 06:35:19 UTC] PHP Warning:  Undefined array key "down" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 89
+[03-Apr-2025 06:35:19 UTC] PHP Warning:  Undefined array key "down" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 89
+[03-Apr-2025 06:35:19 UTC] PHP Warning:  Undefined array key "down" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 89
+[03-Apr-2025 06:35:19 UTC] PHP Warning:  Undefined array key "down" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 89
+[03-Apr-2025 06:35:19 UTC] PHP Warning:  Undefined array key "down" in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 89
+[03-Apr-2025 06:38:14 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'deaddrive_deaddrive.servers_info' doesn't exist in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php:85
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(85): PDO->query('SELECT * \r\n    ...')
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(93): File->getServers()
+#2 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(142): File->getDownloadServers()
+#3 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 85
+[03-Apr-2025 06:38:38 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'sl.server_order' in 'ORDER BY' in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php:85
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(85): PDO->query('SELECT * \r\n    ...')
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(93): File->getServers()
+#2 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(142): File->getDownloadServers()
+#3 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 85
+[03-Apr-2025 06:41:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'sl.server_order' in 'ORDER BY' in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php:87
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(87): PDOStatement->execute(Array)
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(95): File->getServers()
+#2 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(142): File->getDownloadServers()
+#3 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 87
+[03-Apr-2025 06:42:03 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 99
+[03-Apr-2025 06:54:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method File::filterServers() in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php:111
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(142): File->getDownloadServers()
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 111
+[03-Apr-2025 07:07:01 UTC] PHP Warning:  Undefined variable $pdo in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 96
+[03-Apr-2025 07:07:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php:96
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(103): File->increase('views')
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(144): File->increaseView()
+#2 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 96
+[03-Apr-2025 07:07:21 UTC] PHP Fatal error:  Uncaught TypeError: PDOStatement::execute(): Argument #1 ($params) must be of type ?array, int given in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php:98
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(98): PDOStatement->execute(74339)
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(103): File->increase('views')
+#2 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(144): File->increaseView()
+#3 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 98
+[03-Apr-2025 07:08:08 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php:98
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(98): PDOStatement->execute(Array)
+#1 /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php(103): File->increase('views')
+#2 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(144): File->increaseView()
+#3 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 98
+[07-Apr-2025 15:07:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::fetchCoulumn() in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php:24
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(135): File->getByTemId('c593dd663b95481...')
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 24
+[07-Apr-2025 15:08:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::fetchCoulumn() in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php:24
+Stack trace:
+#0 /home/deaddrive/public_html/sites/deaddrive.shop/lib/Tesing.php(135): File->getByTemId('c593dd663b95481...')
+#1 {main}
+  thrown in /home/deaddrive/public_html/sites/deaddrive.shop/lib/File.php on line 24

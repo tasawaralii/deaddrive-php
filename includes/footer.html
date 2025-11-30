@@ -1,0 +1,72 @@
+<?php
+    
+    if (!defined("NAME")) {
+        require_once("config.php");
+    }
+?>
+
+<center>
+    <div class="card" style="width:90%;">
+        <div class="card-header" style="border:0px;">
+            <h6 class="mb-0 text-center">
+
+                <strong>
+
+                    <a href="../about-us">
+                        <i class="fa fa-info-circle text-light"></i> About US
+                    </a> |
+                    <a id="api-link" href="#">
+                        <i class="fa fa-code text-light"></i> API Docs
+                    </a> |
+
+                    <a href="../page/privacy-policy">
+                        <i class="fa fa-bullhorn text-light"></i> Privacy & Policy
+                    </a> |
+                    <a href="../page/terms-conditions">
+                        <i class="fa fa-book text-light"></i> Terms & Conditions
+                    </a> |
+                    <a href="../copyright-policy">
+                        <i class="fa fa-copyright text-light"></i> Copyright Policy
+                    </a> |
+                    <a href="../contact-us">
+                        <i class="fa fa-envelope text-light"></i> DMCA & Contact Us
+                    </a>
+                    
+                     |
+                    <a href="<?PHP echo CONTACT_TELEGRAM ?>" target="_blank">
+                        <i class="fab fa-telegram-plane text-light"></i> 
+                        Join Telegram
+                    </a>
+                </strong>
+                
+
+
+            </h6>
+        </div>
+    </div>
+</center>
+
+<script>
+    document.getElementById("api-link").href = "https://api." + window.location.hostname;
+</script>
+
+
+<script type="text/javascript">
+
+    var l = window.location.pathname,
+        e = l.split('/');
+
+    if (e.length >= 2) {
+
+        var n = (e.length > 2) ? 2 : 1,
+            c = document.getElementById(e[n]);
+
+        if (c) {
+            c.classList.add('active')
+        }
+
+    }
+
+</script>
+
+<script type="text/javascript" src="/js/mdb.min.js"></script>
