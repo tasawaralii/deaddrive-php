@@ -1,11 +1,9 @@
 <?php 
 
-    require('../config.php');
-
   $page = array('title' => 'Privacy Policy');
-  require('../includes/head.html');
+  require('includes/head.html');
   echo "<body>";
-  require('../includes/header-not-login.html');
+  require('includes/header-not-login.html');
 ?>
   <main style="margin-top: 58px">
     
@@ -171,7 +169,7 @@
             </div>
   
 <?php
-  require('../includes/footer.html');
+  require('includes/footer.html');
 ?>
   
   </main>

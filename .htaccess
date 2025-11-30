@@ -1,17 +1,5 @@
 RewriteEngine On
 
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)/$ /$1 [R=301,L]
-
-# Friendly URLs
-RewriteRule ^catch-me/([a-zA-Z0-9-_]+)$ catch-me.php?temid=$1 [L,QSA]
-RewriteRule ^test/([a-zA-Z0-9-_]+)$ test.php?temid=$1 [L,QSA]
-RewriteRule ^file-test/([a-zA-Z0-9-_]+)$ file-test.php?uid=$1 [L,QSA]
-RewriteRule ^file/([a-zA-Z0-9-_]+)$ file.php?uid=$1 [L,QSA]
-RewriteRule ^embed/([a-zA-Z0-9-_]+)$ embed.php?uid=$1 [L,QSA]
-RewriteRule ^File/([a-zA-Z0-9-_]+)$ File.php?id=$1 [L,QSA]
-RewriteRule ^link/([a-zA-Z0-9-_]+)$ link.php?url=$1 [L,QSA]
-RewriteRule ^links/([a-zA-Z0-9-_]+)$ links.php?dead=$1 [L,QSA]
-
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^\.]+)$ $1.php [L]
+RewriteRule ^ index.php [QSA,L]

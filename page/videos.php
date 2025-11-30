@@ -1,13 +1,28 @@
-<?php 
-require('check_login.php');
-$page = array('title' => 'Trash');
-require('data.php');
-$total_files = $user['deleted_files'];
-$domain = $site['domain'];
-$email = $user['email'];
+<?php
+
+checklogin();
+
+$page = array('title' => 'Videos');
+
+$user = userinfo(AES('decrypt', $_COOKIE['ddeml']), $pdo);
+$user_id = $user['user_id'];
 $pgsize = isset($_COOKIE['fpp']) ? $_COOKIE['fpp'] : (setcookie('ffp', '10', time() + 86000 * 30, '/') ? '10' : '');
 $pgnum = (isset($_GET['page'])) ? $_GET['page'] : 1;
-$files = json_decode(file_get_contents("$domain"."/json/deleted.php?pgno=$pgnum&pgsize=$pgsize&email=$email"), true);
+$offset = $pgnum != 1 ? ($pgnum - 1) * $pgsize : 0;
+
+
+$filter = '';
+
+$search = isset($_GET['search']) ? $_GET['search'] : "Name" ;
+
+$filter .= isset($_GET['keyword']) ? "AND $search LIKE '%".$_GET['keyword']."%'" : '' ;
+
+$sortby = isset($_GET['filter']) ? $_GET['filter'] : 'new_date';
+
+$order = isset($_GET['order']) ? $_GET['order'] : "DESC" ;
+
+$files = $pdo->query("SELECT * FROM links_info WHERE user = $user_id AND Type != 'zip' AND Type != 'rar' $filter ORDER BY $sortby $order LIMIT $pgsize OFFSET $offset")->fetchAll(PDO::FETCH_ASSOC);
+$total_files = $pdo->query("SELECT COUNT(*) AS total FROM links_info WHERE user = $user_id AND Type != 'zip' AND Type != 'rar' $filter")->fetchColumn();
 
 require('includes/head.html');
 echo "<body>";
@@ -52,40 +67,34 @@ require('includes/header.html');
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">
-                                    <input class="form-check-input" type="checkbox" id="select_all" />
-                                </th>
+                                <th>Code</th>
+                                <th>Url</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Slug</th>
+                                <th scope="col">Viewa</th>
                                 <th scope="col">Size</th>
-                                <th scope="col">Downloads</th>
                                 <th scope="col">Create at</th>
-                                <th scope="col">Restore</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?PHP foreach($files as $file) { ?>
                                 <tr>
-                                <th scope="row">
-               <input class="form-check-input" type="checkbox" id="select" value="<?PHP echo $file['uid'] ?>"
-                                fname="<?PHP echo $file['Name'] ?>" fsize="<?PHP echo $file['Size'] ?>" />
-                                </th>
+                                <th><div style="cursor: pointer;" onclick="copy('<?PHP echo $file['uid'] ?>', 'embed')"><i class="fa fa-link" ></i></div></th>
+                                <td><div style="cursor: pointer;" onclick="copy('<?PHP echo $file['uid'] ?>', 'link')"><i class="fa fa-play" ></i></div></td>
                                 <td>
-                                    <div class="name">
+                                    <a href="/embed/<?PHP echo $file['uid'] ?>" class="name">
                                         <span data-mdb-toggle="tooltip" title="<?PHP echo $file['Name'] ?>"><?PHP echo $file['Name'] ?></span>
-                                    </div>
+                                    </a>
                                 </td>
-                                <td><?PHP echo formatBytes($file['Size']) ?></td>
+                                <td><?PHP echo $file['uid'] ?></td>
                                 <td><?PHP echo $file['views'] ?></td>
+                                <td><?PHP echo formatBytes($file['size']) ?></td>
+                                
                                 <td><?PHP echo $file['new_date'] ?></td>
-                                <td>
-                                    <button class="btn btn-success"
-                                        onclick="restore('<?PHP echo $file['uid'] ?>', '<?PHP echo $file['Name'] ?>');" data-mdb-toggle="modal"
-                                        data-mdb-target="#Restore"><i class="fas fa-trash-restore"></i></button>
-                                </td>
+                                
                             </tr>
-                                                        <tr>
                                  <?PHP } ?>
-                          </tbody>
+                         </tbody>
                     </table>
                 </div>
 
@@ -99,13 +108,20 @@ require('includes/header.html');
         </div></center>
 
         <div class="mt-4 mb-4" id="menu" style="display: none;">
-            <button class="btn btn-danger" id="restoreButton" data-mdb-toggle="modal" data-mdb-target="#RestoreSelected">Restore</button>
+            <button class="btn btn-light" id="link" data-mdb-toggle="modal" data-mdb-target="#Link">Link</button>
+            <button class="btn btn-light" id="export" data-mdb-toggle="modal" data-mdb-target="#Export">Export</button>
+            <button class="btn btn-danger" id="delete" data-mdb-toggle="modal" data-mdb-target="#Delete">Delete</button>
+            <button class="btn btn-primary" id="pack" onclick="pack();" data-mdb-toggle="modal"
+                data-mdb-target="#Pack">Pack</button>
+                        <button class="btn btn-primary" id="count" onclick="backup_count();">Count</button>
         </div>
 
     </div>
+    </div>
+    </div>
 </main>
 
-<!-- Modal -->
+<div>
 <div class="modal fade" id="Pack" tabindex="-1" aria-labelledby="PackModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -160,26 +176,26 @@ require('includes/header.html');
     </div>
 </div>
 
-<!-- Modal RestoreSelected -->
-<div class="modal fade" id="RestoreSelected" tabindex="-1" aria-labelledby="RestoreSelectedModalLabel" aria-hidden="true">
+<!-- Modal Delete -->
+<div class="modal fade" id="Delete" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="RestoreSelectedModalLabel">Alert</h5>
+                <h5 class="modal-title" id="DeleteModalLabel">Alert</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action="/admin/all-files">
 
                 <div class="modal-body">
-                    <input type="hidden" name="action" value="RestoreSelected">
-                    <div id="RestoreSelectedmsg" class="mb-4"></div>
-                    <div id="RestoreSelectedlist"></div>
+                    <input type="hidden" name="action" value="delete">
+                    <div id="Deletemsg" class="mb-4"></div>
+                    <div id="Deletelist"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-mdb-dismiss="modal">
                         Close
                     </button>
-                    <button type="submit" class="btn btn-success">Confirm</button>
+                    <button type="submit" class="btn btn-danger">Confirm</button>
                 </div>
             </form>
         </div>
@@ -358,20 +374,21 @@ require('includes/header.html');
   </div>
 </div>
 
-<!-- Modal Restore -->
-<div class="modal fade" id="Restore" tabindex="-1" aria-labelledby="RestoreModalLabel" aria-hidden="true">
+<!-- Modal Rename -->
+<div class="modal fade" id="Rename" tabindex="-1" aria-labelledby="RenameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="RestoreModalLabel">Alert</h5>
+                <h5 class="modal-title" id="RenameModalLabel">Alert</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <form method="POST" action="/admin/all-files">
                 <div class="modal-body">
                     <div class="form-outline">
-                        <input type="hidden" name="action" value="restore">
-                        <input type="text" id="n" name="restore" class="form-control" disabled />
+                        <input type="hidden" name="action" value="rename">
+                        <input type="text" id="n" name="rename" class="form-control" />
+                        <label class="form-label" for="n">Name</label>
                         <input type="hidden" id="i" name="id">
                     </div>
                 </div>
@@ -379,16 +396,18 @@ require('includes/header.html');
                     <button type="button" class="btn btn-light" data-mdb-dismiss="modal">
                         Close
                     </button>
-                    <button type="submit" class="btn btn-primary">Restore</button>
+                    <button type="submit" class="btn btn-primary">Rename</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+</div>
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
   let custom_share = "<?PHP echo $site['domain'] ?>";
   var c_domain = custom_share ? custom_share : window.location.origin;
-  var total = <?PHP echo ($result = intval($user['deleted_files'] / $pgsize));?>,
+  var total = <?PHP echo ($result = intval($total_files / $pgsize));?>,
     page = <?PHP echo $pgnum ?>,
     prev = document.createElement("button"),
     next = document.createElement("button"),
@@ -459,207 +478,50 @@ function urlpage(halaman) {
     return "?page=" + halaman;
 }
 
-</script>
+  
 
-<script>
-
-    function unchoose() {
-        var alls = document.getElementById("select_all");
-        alls.checked = false;
-        document.querySelectorAll("#select").forEach(function (a, b) {
-            a.checked = false;
-        });
-        setan();
-    }
-
-    if (document.getElementById("select_all")) {
-        document.getElementById("select_all").onclick = function () {
-            document.querySelectorAll("#select").forEach(function (a, b) {
-                if (a.checked) {
-                    a.checked = false
-                } else {
-                    a.checked = true
-                }
-            });
-            hitung()
-        }
-    }
-
-    if (document.getElementById("select")) {
-        document.querySelectorAll("#select").forEach(function (a, b) {
-            a.onclick = function () {
-                hitung()
-            }
-        })
-    }
-
-    function hitung() {
-        var total = 0,
-            menu = document.getElementById("menu");
-        document.querySelectorAll("#select").forEach(function (a, b) {
-            if (a.checked) {
-                total++
-            }
-        });
-        if (total >= 1) {
-            setan(true);
-            menu.scrollIntoView()
-        } else {
-            setan()
-        }
-    }
-
-    function setan(hide = false) {
-        var menu = document.getElementById('menu');
-        if (!hide) {
-            menu.setAttribute("style", "display:none")
-        } else {
-            menu.removeAttribute("style")
-        }
-
-    }
+function toastr(title, message) {
+    var toast = document.createElement("div");
+    toast.innerHTML = `
+	<div class="toast-header">
+		<strong class="me-auto">${title}</strong>
+		<button type="button" class="btn-close" data-mdb-dismiss="toast" aria-label="Close"></button>
+	</div>
+	<div class="toast-body">${message}</div>`;
+    toast.classList.add("toast", "fade");
+    document.body.appendChild(toast);
+    var toastInstance = new mdb.Toast(toast, {
+      stacking: true,
+      hidden: true,
+      width: "330px",
+      position: "top-right",
+      autohide: true,
+      delay: 3e3
+    });
+    toastInstance.show()
+  }
 
 
-    function pack() {
-        var ids = [],
-            msg = document.getElementById('packmsg'),
-            list = document.getElementById('packlist');
-        document.querySelectorAll("#select").forEach(function (a, b) {
-            if (a.checked) {
-                ids.push(a.value)
-                var input = document.createElement('input');
-                input.setAttribute('name', 'id[]');
-                input.setAttribute('type', 'hidden');
-                input.setAttribute('value', a.value)
-                list.appendChild(input)
-            }
-        });
-        if (ids.length >= 1) {
-            msg.innerHTML = 'Are you sure, want to add ' + ids.length + ' files to following Pack'
-        }
-    }
-
-    document.getElementById('restoreButton').onclick = function () {
-        var ids = [],
-            msg = document.getElementById('RestoreSelectedmsg'),
-            list = document.getElementById('RestoreSelectedlist');
-        list.innerHTML = '';
-        document.querySelectorAll("#select").forEach(function (a, b) {
-            if (a.checked) {
-                ids.push(a.value)
-                var input = document.createElement('input');
-                input.setAttribute('name', 'id[]');
-                input.setAttribute('type', 'hidden');
-                input.setAttribute('value', a.value)
-                list.appendChild(input)
-            }
-        });
-
-        if (ids.length >= 1) {
-            msg.innerHTML = 'Are you sure, want to Restore ' + ids.length + ' files?'
-        }
-    }
-
+function copy(id, mode) {
+    var domain = "<?php echo $site['domain']; ?>";
+    var link = domain + "/embed/" + id;
+    var copyText; // Declare the variable properly
     
-
-
-    document.getElementById('link').onclick = function () {
-
-        var data = document.getElementById('data-link');
-        data.value = '';
-
-        document.querySelectorAll("#select").forEach(function (a, b) {
-            if (a.checked) {
-                console.log(`${c_domain}/file/${a.getAttribute('value')}`)
-                data.value += `${c_domain}/file/${a.getAttribute('value')}\n`
-            }
-        });
+    if (mode === 'link') {
+        copyText = link;
+    } else {
+        copyText = `<iframe id="embedvideo" src="${link}" allowfullscreen="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="width: 100%;height: 100%;"></iframe>`;
     }
-
-    document.getElementById('export').onclick = function () {
-
-        var data = document.getElementById('export-link');
-        data.value = '';
-
-        document.querySelectorAll("#select").forEach(function (a, b) {
-            if (a.checked) {
-                console.log(`${c_domain}/file/${a.getAttribute('value')}`)
-                data.value += `${a.getAttribute('fname')} [${formatBytes(a.getAttribute('fsize'))} ]\n${c_domain}/file/${a.getAttribute('value')}\n\n`
-            }
-        });
-    }
-
-    function restore(id, name) {
-        document.getElementById('i').value = id;
-        document.getElementById('n').value = name;
-    }
-
-    function abbrNum(number, decPlaces) {
-        decPlaces = Math.pow(10, decPlaces);
-        var abbrev = ["k", "m", "b", "t"];
-        for (var i = abbrev.length - 1; i >= 0; i--) {
-            var size = Math.pow(10, (i + 1) * 3);
-            if (size <= number) {
-                number = Math.round(number * decPlaces / size) / decPlaces;
-
-                if ((number == 1000) && (i < abbrev.length - 1)) {
-                    number = 1;
-                    i++;
-                }
-                number += abbrev[i];
-                break;
-            }
-        }
-        return number;
-    }
-
-    function formatBytes(a, b = 2, k = 1024) {
-        with (Math) {
-            let d = floor(log(a) / log(k));
-            return 0 == a ? "0 Bytes" : parseFloat((a / pow(k, d)).toFixed(max(0, b))) + " " + ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][d]
-        }
-    }
-function setCookie() {
-    var value = document.getElementById('plimit').value;
-    // Create a new Date object for one month ahead
-    var expiryDate = new Date();
-    expiryDate.setMonth(expiryDate.getMonth() + 1);
-
-    // Convert the expiry date to UTC format
-    var expires = expiryDate.toUTCString();
-
-    // Set the cookie
-    document.cookie = "fpp=" + value + "; expires=" + expires + "; path=/";
-    // alert(value);
-    window.location.reload();
+    
+    navigator.clipboard.writeText(copyText).then(() => {
+        toastr("Alert", "Link copied to clipboard");
+    });
 }
-</script>
- <center>
-     <br>
-     <center>
-            
-        
-</center> </center>
- 
 
-<script type="text/javascript">
-
-    var l = window.location.pathname,
-        e = l.split('/');
-
-    if (e.length >= 2) {
-
-        var n = (e.length > 2) ? 2 : 1,
-            c = document.getElementById(e[n]);
-
-        if (c) {
-            c.classList.add('active')
-        }
-
-    }
 
 </script>
-<script type="text/javascript" src="https://appdrive.cloud/content/data/MDB5-STANDARD-UI-KIT-Free-3.9.0/js/mdb.min.js"></script>
+
+<!--<script type="text/javascript" src="https://appdrive.cloud/content/data/MDB5-STANDARD-UI-KIT-Free-3.9.0/js/mdb.min.js"></script>-->
 
 
 </body>

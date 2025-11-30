@@ -1,6 +1,5 @@
 <?php 
     
-    require("config.php");
     
   $page = array('title' => 'Copyright Policy');
   require('includes/head.html');

@@ -1,16 +1,15 @@
-<?php
-require('functions.php');
+<?php 
+
 checklogin();
-require('db.php');
-require('config.php');
-$page = array('title' => 'Videos');
+
+$page = array('title' => 'Files');
 
 $user = userinfo(AES('decrypt', $_COOKIE['ddeml']), $pdo);
 $user_id = $user['user_id'];
 $pgsize = isset($_COOKIE['fpp']) ? $_COOKIE['fpp'] : (setcookie('ffp', '10', time() + 86000 * 30, '/') ? '10' : '');
 $pgnum = (isset($_GET['page'])) ? $_GET['page'] : 1;
 $offset = $pgnum != 1 ? ($pgnum - 1) * $pgsize : 0;
-require('site_info.php');
+
 
 $filter = '';
 
@@ -22,9 +21,10 @@ $sortby = isset($_GET['filter']) ? $_GET['filter'] : 'new_date';
 
 $order = isset($_GET['order']) ? $_GET['order'] : "DESC" ;
 
-$files = $pdo->query("SELECT * FROM links_info WHERE user = $user_id AND Type != 'zip' AND Type != 'rar' $filter ORDER BY $sortby $order LIMIT $pgsize OFFSET $offset")->fetchAll(PDO::FETCH_ASSOC);
-$total_files = $pdo->query("SELECT COUNT(*) AS total FROM links_info WHERE user = $user_id AND Type != 'zip' AND Type != 'rar' $filter")->fetchColumn();
 
+$files = $pdo->query("SELECT * FROM links_info WHERE user = $user_id AND live = 0 $filter ORDER BY $sortby $order LIMIT $pgsize OFFSET $offset")->fetchAll(PDO::FETCH_ASSOC);
+$total_files = $pdo->query("SELECT COUNT(*) AS total FROM links_info WHERE user = $user_id AND live = 0 $filter")->fetchColumn();
+# print_r($files);
 require('includes/head.html');
 echo "<body>";
 require('includes/header.html');
@@ -39,9 +39,8 @@ require('includes/header.html');
                 <div class="input-group">
                     <input name="keyword" type="text" class="form-control" placeholder="Keyword"  autocomplete="off" />
                     <select name="search" class="select">
-                        <option value="name" >Name</option>
-                        <option value="key" >File Key</option>
-                        <option value="id" >File ID</option>
+                        <option value="Name" >Name</option>
+                        <option value="uid" >File ID</option>
                     </select>
                     <select name="order" class="select">
                         <option value="DESC" >DESC</option>
@@ -62,40 +61,54 @@ require('includes/header.html');
   <center> <button id="panel" data-mdb-toggle="modal" data-mdb-target="#Panel" class="btn btn-info"
                       style="padding: .2rem 1rem;font-size: .7rem; line-height: 1.8;">Files Per Page</button></center>
   <hr> </p>
-              
+             
               
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Code</th>
-                                <th>Url</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Slug</th>
-                                <th scope="col">Viewa</th>
+                                <th scope="col">
+                                    <input class="form-check-input" type="checkbox" id="select_all" />
+                                </th>
+                                <th>Copy</th>
+                                <th scope="col"><a href="/files?filter=Name&order=ASC">Name</a></th>
                                 <th scope="col">Size</th>
+                                <th scope="col">Downloads</th>
+                                <th scope="col">Views</th>
                                 <th scope="col">Create at</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Logs</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?PHP foreach($files as $file) { ?>
                                 <tr>
-                                <th><div style="cursor: pointer;" onclick="copy('<?PHP echo $file['uid'] ?>', 'embed')"><i class="fa fa-link" ></i></div></th>
-                                <td><div style="cursor: pointer;" onclick="copy('<?PHP echo $file['uid'] ?>', 'link')"><i class="fa fa-play" ></i></div></td>
+                                <th scope="row">
+               <input class="form-check-input" type="checkbox" id="select" value="<?PHP echo $file['uid'] ?>"
+                                fname="<?PHP echo $file['Name'] ?>" fsize="<?PHP echo $file['size'] ?>" />
+                                </th>
+                                <td><div style="cursor: pointer;" onclick="copy('<?PHP echo $file['uid'] ?>')"><i class="fa fa-copy" ></i></div></td>
                                 <td>
-                                    <a href="/embed/<?PHP echo $file['uid'] ?>" class="name">
+                                    <a href="/file/<?PHP echo $file['uid'] ?>" class="name">
                                         <span data-mdb-toggle="tooltip" title="<?PHP echo $file['Name'] ?>"><?PHP echo $file['Name'] ?></span>
                                     </a>
                                 </td>
-                                <td><?PHP echo $file['uid'] ?></td>
-                                <td><?PHP echo $file['views'] ?></td>
                                 <td><?PHP echo formatBytes($file['size']) ?></td>
-                                
+                                <td><?PHP echo $file['downloads'] ?></td>
+                                <td><?PHP echo $file['views'] ?></td>
                                 <td><?PHP echo $file['new_date'] ?></td>
-                                
+                                <td>
+                                    <button class="btn btn-primary"
+                                        onclick="rename('<?PHP echo $file['uid'] ?>', '<?PHP echo $file['Name'] ?>');" data-mdb-toggle="modal"
+                                        data-mdb-target="#Rename"><i class="fas fa-pen"></i></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" onclick="showLogs('<?= $file['uid'] ?>')">Logs</button>
+                                </td>
                             </tr>
+                                                        <tr>
                                  <?PHP } ?>
-                         </tbody>
+                          </tbody>
                     </table>
                 </div>
 
@@ -118,11 +131,9 @@ require('includes/header.html');
         </div>
 
     </div>
-    </div>
-    </div>
 </main>
 
-<div>
+<!-- Modal -->
 <div class="modal fade" id="Pack" tabindex="-1" aria-labelledby="PackModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -150,6 +161,27 @@ require('includes/header.html');
         </div>
     </div>
 </div>
+
+
+<!--Modal Logs-->
+
+<div class="modal fade" id="fileDetailsModal" tabindex="-1" aria-labelledby="fileDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fileDetailsLabel">File Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body">
+                <h6 id="fileName"></h6>
+                <h6 id="updateDate"></h6>
+                <ul id="serverDetails" class="list-group"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Modal Backup -->
 <div class="modal fade" id="Backup" tabindex="-1" aria-labelledby="BackupModalLabel" aria-hidden="true">
@@ -403,8 +435,6 @@ require('includes/header.html');
         </div>
     </div>
 </div>
-</div>
-
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
   let custom_share = "<?PHP echo $site['domain'] ?>";
   var c_domain = custom_share ? custom_share : window.location.origin;
@@ -479,7 +509,219 @@ function urlpage(halaman) {
     return "?page=" + halaman;
 }
 
-  
+</script>
+
+<script>
+
+    function showLogs(id) {
+        
+        fetch("/ajax/show-logs", {
+            "method" : "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "body" : "uid=" + id
+        }).then(response => response.json())
+            .then(res => {
+            if(res.status == "success") {
+                
+                var responseData = JSON.parse(res.logs);
+                
+                document.getElementById("fileName").textContent = responseData.Name[0];
+                document.getElementById("updateDate").textContent = responseData.Date[0];
+                const serverDetails = document.getElementById("serverDetails");
+                
+                serverDetails.innerHTML = "";
+                
+                for (const [server, details] of Object.entries(responseData)) {
+                    if (server !== "Name" && server !== "Date") {
+                        const listItem = document.createElement("li");
+                        listItem.className = "list-group-item";
+                        listItem.innerHTML = `<strong>${server}:</strong> ${details.join(", ")}`;
+                        serverDetails.appendChild(listItem);
+                    }
+                }
+                new bootstrap.Modal(document.getElementById("fileDetailsModal")).show();
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("File Not Updated");
+        });
+    }
+
+    function unchoose() {
+        var alls = document.getElementById("select_all");
+        alls.checked = false;
+        document.querySelectorAll("#select").forEach(function (a, b) {
+            a.checked = false;
+        });
+        setan();
+    }
+
+    if (document.getElementById("select_all")) {
+        document.getElementById("select_all").onclick = function () {
+            document.querySelectorAll("#select").forEach(function (a, b) {
+                if (a.checked) {
+                    a.checked = false
+                } else {
+                    a.checked = true
+                }
+            });
+            hitung()
+        }
+    }
+
+    if (document.getElementById("select")) {
+        document.querySelectorAll("#select").forEach(function (a, b) {
+            a.onclick = function () {
+                hitung()
+            }
+        })
+    }
+
+    function hitung() {
+        var total = 0,
+            menu = document.getElementById("menu");
+        document.querySelectorAll("#select").forEach(function (a, b) {
+            if (a.checked) {
+                total++
+            }
+        });
+        if (total >= 1) {
+            setan(true);
+            menu.scrollIntoView()
+        } else {
+            setan()
+        }
+    }
+
+    function setan(hide = false) {
+        var menu = document.getElementById('menu');
+        if (!hide) {
+            menu.setAttribute("style", "display:none")
+        } else {
+            menu.removeAttribute("style")
+        }
+
+    }
+
+
+    function pack() {
+        var ids = [],
+            msg = document.getElementById('packmsg'),
+            list = document.getElementById('packlist');
+        document.querySelectorAll("#select").forEach(function (a, b) {
+            if (a.checked) {
+                ids.push(a.value)
+                var input = document.createElement('input');
+                input.setAttribute('name', 'id[]');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('value', a.value)
+                list.appendChild(input)
+            }
+        });
+        if (ids.length >= 1) {
+            msg.innerHTML = 'Are you sure, want to add ' + ids.length + ' files to following Pack'
+        }
+    }
+
+    document.getElementById('delete').onclick = function () {
+        var ids = [],
+            msg = document.getElementById('Deletemsg'),
+            list = document.getElementById('Deletelist');
+        list.innerHTML = '';
+        document.querySelectorAll("#select").forEach(function (a, b) {
+            if (a.checked) {
+                ids.push(a.value)
+                var input = document.createElement('input');
+                input.setAttribute('name', 'id[]');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('value', a.value)
+                list.appendChild(input)
+            }
+        });
+
+        if (ids.length >= 1) {
+            msg.innerHTML = 'Are you sure, want to Delete ' + ids.length + ' files?'
+        }
+    }
+
+    
+
+
+    document.getElementById('link').onclick = function () {
+
+        var data = document.getElementById('data-link');
+        data.value = '';
+
+        document.querySelectorAll("#select").forEach(function (a, b) {
+            if (a.checked) {
+                console.log(`${c_domain}/file/${a.getAttribute('value')}`)
+                data.value += `${c_domain}/file/${a.getAttribute('value')}\n`
+            }
+        });
+    }
+
+    document.getElementById('export').onclick = function () {
+
+        var data = document.getElementById('export-link');
+        data.value = '';
+
+        document.querySelectorAll("#select").forEach(function (a, b) {
+            if (a.checked) {
+                console.log(`${c_domain}/file/${a.getAttribute('value')}`)
+                data.value += `${a.getAttribute('fname')} [${formatBytes(a.getAttribute('fsize'))} ]\n${c_domain}/file/${a.getAttribute('value')}\n\n`
+            }
+        });
+    }
+
+    function rename(id, name) {
+        document.getElementById('i').value = id;
+        document.getElementById('n').value = name;
+    }
+
+    function abbrNum(number, decPlaces) {
+        decPlaces = Math.pow(10, decPlaces);
+        var abbrev = ["k", "m", "b", "t"];
+        for (var i = abbrev.length - 1; i >= 0; i--) {
+            var size = Math.pow(10, (i + 1) * 3);
+            if (size <= number) {
+                number = Math.round(number * decPlaces / size) / decPlaces;
+
+                if ((number == 1000) && (i < abbrev.length - 1)) {
+                    number = 1;
+                    i++;
+                }
+                number += abbrev[i];
+                break;
+            }
+        }
+        return number;
+    }
+
+    function formatBytes(a, b = 2, k = 1024) {
+        with (Math) {
+            let d = floor(log(a) / log(k));
+            return 0 == a ? "0 Bytes" : parseFloat((a / pow(k, d)).toFixed(max(0, b))) + " " + ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][d]
+        }
+    }
+function setCookie() {
+    var value = document.getElementById('plimit').value;
+    // Create a new Date object for one month ahead
+    var expiryDate = new Date();
+    expiryDate.setMonth(expiryDate.getMonth() + 1);
+
+    // Convert the expiry date to UTC format
+    var expires = expiryDate.toUTCString();
+
+    // Set the cookie
+    document.cookie = "fpp=" + value + "; expires=" + expires + "; path=/";
+    // alert(value);
+    window.location.reload();
+}
+
+    
 
 function toastr(title, message) {
     var toast = document.createElement("div");
@@ -502,27 +744,39 @@ function toastr(title, message) {
     toastInstance.show()
   }
 
-
-function copy(id, mode) {
-    var domain = "<?php echo $site['domain']; ?>";
-    var link = domain + "/embed/" + id;
-    var copyText; // Declare the variable properly
-    
-    if (mode === 'link') {
-        copyText = link;
-    } else {
-        copyText = `<iframe id="embedvideo" src="${link}" allowfullscreen="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="width: 100%;height: 100%;"></iframe>`;
+function copy(id) {
+    id = "<?PHP echo $site['domain'] ?>/file/" + id;
+        navigator.clipboard.writeText(id).then(() => {
+            toastr("Alert", "Link copied to clipboard")
+        })
     }
-    
-    navigator.clipboard.writeText(copyText).then(() => {
-        toastr("Alert", "Link copied to clipboard");
-    });
-}
+</script>
+ <center>
+     <br>
+     <center>
+            
+        
+</center> </center>
+ 
 
+<script type="text/javascript">
+
+    var l = window.location.pathname,
+        e = l.split('/');
+
+    if (e.length >= 2) {
+
+        var n = (e.length > 2) ? 2 : 1,
+            c = document.getElementById(e[n]);
+
+        if (c) {
+            c.classList.add('active')
+        }
+
+    }
 
 </script>
-
-<!--<script type="text/javascript" src="https://appdrive.cloud/content/data/MDB5-STANDARD-UI-KIT-Free-3.9.0/js/mdb.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>

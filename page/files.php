@@ -1,7 +1,7 @@
 <?php 
-require('functions.php');
+
 checklogin();
-require('db.php');
+
 $page = array('title' => 'Files');
 
 $user = userinfo(AES('decrypt', $_COOKIE['ddeml']), $pdo);
@@ -9,7 +9,7 @@ $user_id = $user['user_id'];
 $pgsize = isset($_COOKIE['fpp']) ? $_COOKIE['fpp'] : (setcookie('ffp', '10', time() + 86000 * 30, '/') ? '10' : '');
 $pgnum = (isset($_GET['page'])) ? $_GET['page'] : 1;
 $offset = $pgnum != 1 ? ($pgnum - 1) * $pgsize : 0;
-require('site_info.php');
+
 
 $filter = '';
 
@@ -22,8 +22,8 @@ $sortby = isset($_GET['filter']) ? $_GET['filter'] : 'new_date';
 $order = isset($_GET['order']) ? $_GET['order'] : "DESC" ;
 
 
-$files = $pdo->query("SELECT * FROM links_info WHERE user = $user_id AND live = 0 $filter ORDER BY $sortby $order LIMIT $pgsize OFFSET $offset")->fetchAll(PDO::FETCH_ASSOC);
-$total_files = $pdo->query("SELECT COUNT(*) AS total FROM links_info WHERE user = $user_id")->fetchColumn();
+$files = $pdo->query("SELECT * FROM links_info WHERE user = $user_id $filter ORDER BY $sortby $order LIMIT $pgsize OFFSET $offset")->fetchAll(PDO::FETCH_ASSOC);
+$total_files = $pdo->query("SELECT COUNT(*) AS total FROM links_info WHERE user = $user_id $filter")->fetchColumn();
 # print_r($files);
 require('includes/head.html');
 echo "<body>";

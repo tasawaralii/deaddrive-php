@@ -1,6 +1,6 @@
 <?php 
-    require("config.php");
-    
+
+
   $page = array('title' => 'About Us');
   require('includes/head.html');
   echo "<body>";

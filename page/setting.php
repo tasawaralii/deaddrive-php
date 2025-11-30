@@ -1,9 +1,5 @@
 <?php
 
-require('functions.php');
-require('db.php');
-require('config.php');
-require('autoload.php');
 checklogin();
 
 

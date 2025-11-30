@@ -1,10 +1,5 @@
 <?php
 
-require('functions.php');
-require('db.php');
-require_once("config.php");
-require("autoload.php");
-
 checklogin();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["action"] === "share") {
@@ -50,9 +45,10 @@ $links = [];
 
 if($user_id == 2) {
         
-    $links = json_decode(fetchContent("https://dbase.deaddrive.icu/api/deaddrive.php?key=deadtoonszylith"), true);
-    
-    $links = array_map(function($link){return "https://drive.google.com/file/d/" . $link . "/view?usp=drivesdk";},$links);
+    $links = json_decode(fetchContent("http://dbase.deaddrive.icu/api/deaddrive.php?key=deadtoonszylith"), true);
+    if($links) {
+      $links = array_map(function($link){return "https://drive.google.com/file/d/" . $link . "/view?usp=drivesdk";},$links);
+    }
     
 }
 

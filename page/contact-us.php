@@ -1,7 +1,7 @@
 <?php 
     
-    require("config.php");
-  $page = array('title' => '');
+
+    $page = array('title' => '');
   require('includes/head.html');
   echo "<body>";
   require('includes/header-not-login.html');

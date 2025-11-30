@@ -1,11 +1,9 @@
 <?PHP
-require_once('check_login.php');
+
 $page = array('title' => 'Dashboard');
-require('functions.php');
-require('db.php');
 $email = AES('decrypt', $_COOKIE['ddeml']);
 $user = userinfo($email, $pdo, true);
-require('config.php');
+
 require_once('includes/head.html');
 ?>
 <body>

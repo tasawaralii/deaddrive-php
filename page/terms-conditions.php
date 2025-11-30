@@ -1,9 +1,9 @@
 <?php 
 
   $page = array('title' => 'Term And Conditions');
-  require('../includes/head.html');
+  require('includes/head.html');
   echo "<body>";
-  require('../includes/header-not-login.html');
+  require('includes/header-not-login.html');
 ?>
   <main style="margin-top: 58px">
     
@@ -44,7 +44,7 @@ For any DMCA or takedown, Submit with proper URL using <a href="/contact-us"><st
 </div></div>
   
 <?php
-  require('../includes/footer.html');
+  require('includes/footer.html');
 ?>
   
   </main>
