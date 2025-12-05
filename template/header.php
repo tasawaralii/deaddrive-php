@@ -25,11 +25,6 @@
             <i class="fas fa-play fa-fw me-3"></i>
             <span>Videos</span>
           </a>
-          <a href="/broken-files" class="list-group-item list-group-item-action py-2 ripple" id="broken-files">
-            <i class="fas fa-chain-broken fa-fw me-3"></i>
-            <span>Broken</span>
-          </a>
-
           <a href="/status" class="list-group-item list-group-item-action py-2 ripple" id="status">
             <i class="fas fa-server fa-fw me-3"></i>
             <span>Status</span>

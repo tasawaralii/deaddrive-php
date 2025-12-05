@@ -68,7 +68,7 @@ $title = 'Login';
 
                 <div class="text-center mt-3">
                     <p style="color:black;">OR</p>
-                    <a href="/check_auth" class="btn btn-block btn-danger"> <i class="fab fa-google-plus mr-2"></i> Sign
+                    <a href="/service/google-login" class="btn btn-block btn-danger"> <i class="fab fa-google-plus mr-2"></i> Sign
                         in using Google+ </a>
                 </div>
 

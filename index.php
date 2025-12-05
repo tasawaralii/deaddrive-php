@@ -12,22 +12,34 @@ if (isset($_COOKIE['ddeml'])) {
     $_SERVER['user'] = $user;
 }
 
-$protected_paths = ["dashboard","share","files","account","broken-files","setting","status","videos"];
+$protected_paths = ["dashboard", "share", "files", "account", "broken-files", "setting", "status", "videos"];
 
 $path = $_SERVER['REQUEST_URI'];
 $title = $_ENV['NAME'];
 $filePath = __DIR__ . "/pages/404.php";
 
 if ($path == "/") {
+
     $filePath = __DIR__ . "/pages/home.php";
-} elseif (preg_match('#/(dashboard|share|files|login|about-us|account|broken-files|contact-us|copyright-policy|logout|privacy-policy|setting|status|terms-conditions|videos)#', $path, $matches)) {
-    if(in_array($matches[1], $protected_paths)) {
-        if(!isset($_SERVER['user'])) {
+
+} elseif (preg_match('#/files/(delete|rename|show-logs)#', $path, $matches)) {
+
+    require_once __DIR__ . "/service/" . $matches[1] . ".php";
+    exit;
+
+} elseif (preg_match('#/google-login#', $path)) {
+    require_once __DIR__ . "/service/google-login.php";
+    exit;
+} elseif (preg_match('#/(dashboard|share|files|login|about-us|account|contact-us|copyright-policy|logout|privacy-policy|setting|status|terms-conditions|videos)#', $path, $matches)) {
+
+    if (in_array($matches[1], $protected_paths)) {
+        if (!isset($_SERVER['user'])) {
             $filePath = __DIR__ . "/pages/logout.php";
         }
-    } else {
-        $filePath = __DIR__ . "/pages/" . $matches[1] . ".php";
     }
+
+    $filePath = __DIR__ . "/pages/" . $matches[1] . ".php";
+
 }
 
 if (file_exists($filePath)) {

@@ -219,7 +219,7 @@ $total_files = $pdo->query("SELECT COUNT(*) AS total FROM links_info WHERE user 
                 <h5 class="modal-title" id="DeleteModalLabel">Alert</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="/admin/all-files">
+            <form method="POST" action="delete">
 
                 <div class="modal-body">
                     <input type="hidden" name="action" value="delete">
@@ -418,7 +418,7 @@ $total_files = $pdo->query("SELECT COUNT(*) AS total FROM links_info WHERE user 
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form method="POST" action="/admin/all-files">
+            <form method="POST" action="/files/rename">
                 <div class="modal-body">
                     <div class="form-outline">
                         <input type="hidden" name="action" value="rename">
@@ -514,7 +514,7 @@ $total_files = $pdo->query("SELECT COUNT(*) AS total FROM links_info WHERE user 
 
     function showLogs(id) {
 
-        fetch("/ajax/show-logs", {
+        fetch("/files/show-logs", {
             "method": "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -645,9 +645,6 @@ $total_files = $pdo->query("SELECT COUNT(*) AS total FROM links_info WHERE user 
             msg.innerHTML = 'Are you sure, want to Delete ' + ids.length + ' files?'
         }
     }
-
-
-
 
     document.getElementById('link').onclick = function () {
 

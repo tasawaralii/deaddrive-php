@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':id', $id, PDO::PARAM_STR);
             $success = $stmt->execute();
             if ($success) {
-                header("Location: $deaddrive/files");
+                header("Location: /files");
                 exit;
             } else {
                 echo "Error updating Name.";

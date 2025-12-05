@@ -164,9 +164,7 @@ class User {
         $stmt->execute([':user_id' => $this->getUserId(),':server_id' => $server_id]);
     }
     public function getUserServerDetails($server_id) {
-        
-        $response = [];
-        
+                
         $sql = "SELECT ua.server_name, ua.server_domain, si.Name, si.api_parameters_number,ua.api,ua.email,si.getApi 
                 FROM user_apis ua JOIN server_info si ON ua.server_id = si.server_id 
                 WHERE ua.user_id = :user_id AND ua.server_id = :server_id";
@@ -195,8 +193,6 @@ class User {
         'api_fields' => $api_fields
     ];
         
-        return $response;
-
     }
     public function setCustomServerName($server_id,$name) {
         $stmt = $this->db->prepare("UPDATE user_apis SET server_name = :server_name WHERE user_id = :user_id AND server_id = :server_id");
