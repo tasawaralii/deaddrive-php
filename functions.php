@@ -29,11 +29,13 @@ function fetchContent($url)
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
     $response = curl_exec($ch);
 
     if (curl_errno($ch)) {
-        echo "cURL Error: " . curl_error($ch);
-        return false;
+        $error = curl_error($ch);
+        curl_close($ch);
+        throw new Exception($error);
     }
 
     curl_close($ch);

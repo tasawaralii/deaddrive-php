@@ -3,7 +3,7 @@ class GoogleDrive {
 
     public static function fetchFileInfo($driveId) {
 
-        $url = "https://www.googleapis.com/drive/v3/files/{$driveId}?fields=*&supportsAllDrives=True&key=". GOOGLE_API;
+        $url = "https://www.googleapis.com/drive/v3/files/{$driveId}?fields=*&supportsAllDrives=True&key=". $_ENV['GOOGLE_API'];
 
         $data = Fetch::getRequest($url);
 
@@ -15,7 +15,7 @@ class GoogleDrive {
     
     public static function fetchFilesFromFolder($folderId) {
 
-    $apiUrl = "https://www.googleapis.com/drive/v3/files?q=%27{$folderId}%27+in+parents&fields=files(id,webViewLink,mimeType)&key=" .GOOGLE_API ."&orderBy=name&supportsAllDrives=True&includeItemsFromAllDrives=True";
+    $apiUrl = "https://www.googleapis.com/drive/v3/files?q=%27{$folderId}%27+in+parents&fields=files(id,webViewLink,mimeType)&key=" .$_ENV['GOOGLE_API'] ."&orderBy=name&supportsAllDrives=True&includeItemsFromAllDrives=True";
     
     $response = Fetch::getRequest($apiUrl);
     
